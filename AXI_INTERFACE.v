@@ -122,12 +122,12 @@ module axi_top_ram#(parameter data_width = 32,
           else
             if(write_state == resp)begin
               s_axi_bvalid <= 1'b1;
-             
-              ram_write_data <= s_axi_wdata;
-              s_axi_wready <= 1'b0;
+            
+
+              else if(s_axi_bvalid && s_axi_bready)begin
+                s_axi_bvalid <= 1'b0;
             end
-          else
-               s_axi_wready <= 1'b0;
+         
           end
 
   
