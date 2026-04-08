@@ -130,5 +130,40 @@ module axi_top_ram#(parameter data_width = 32,
          
           end
 
+          //read address channel 
+
+          always@(posedge clk) begin
+            if(!aresetn)
+              begin
+                s_axi_arready<=1'b0;
+                read_addr_reg <= {addr_width{1'b0}};
+                read_state <= idle;
+              end
+            else
+              begin
+                case(read_state)
+                  idle : begin
+                    s_axi_arready <= 1'b0;
+                    if(s_axi_arready && s_axi_arvalid)begin
+                      read_addr_reg <= s_axi_araddr;
+                      s_axi_arready <= 1'b0;
+                      read_state <= read;
+                    end
+                  end
+                  read : begin
+                    read_state <= resp;
+                  end
+                  resp : begin
+                    if(s_axi_rready && s_axi_rvalid)
+                    read_state <= idle;
+                  end
+                  default : read_state <= idle;
+               
+                
+                endcase
+              end
+          end
+                      
+
   
                     
