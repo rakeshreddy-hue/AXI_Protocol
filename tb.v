@@ -62,5 +62,39 @@ module tb_axi4_ram();
 
  integer errors = 0;
   integer testnum = 0;
+
+
+  axi4_ram  #(.DATA_WIDTH(DATA_WIDTH),
+                 .ADDR_WIDTH(ADDR-WIDTH),
+              .RAM_DEPTH(RAM_DEPTH),
+                 .ID_WIDTH(ID_WIDTH) 
+             ) DUT ( 
+    .aclk(aclk),
+    .aresetn(aresetn),
+    .s_axi_awid(s_axi_awid),
+    .s_axi_awaddr(s_axi_awaddr),
+    .awlen(awlen),                                                
+    .awsize(awsize),
+    .awburst(awburst),
+    .awvalid(awvalid),
+    .awready(awready),
+    .s_axi_wdata(s_axi_wdata),
+    .s_axi_wstrb(s_axi_wstrb),
+                                                                  
+    .wlast(wlast),
+    .wvalid(wvalid),
+    .wready(wready),
+    .s_axi_bid(s_axi_bid),
+    .bresp(bresp),
+    .bvalid(bvalid),
+    .bready(bready),
+    .s_axi_arid(s_axi_arid),
+    .s_axi_araddr(s_axi_araddr),
+    .arlen(arlen),                                            
+    .arsize(arsize),
+    .arburst(arburst),
+    .arvalid(arvalid),
+    .arready(arready),
+    
   
 
